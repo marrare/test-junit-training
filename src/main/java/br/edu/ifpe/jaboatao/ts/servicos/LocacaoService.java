@@ -13,6 +13,10 @@ import br.edu.ifpe.jaboatao.ts.entidades.Cliente;
 import br.edu.ifpe.jaboatao.ts.entidades.Locacao;
 
 public class LocacaoService {
+	private int varPublica;
+	private int varPrivate;
+	protected int varProtegida;
+	int varDefault;
 	
 	public Locacao alugarBicicleta(Cliente cliente, Bicicleta bicicleta) {
 		Locacao locacao = new Locacao();
@@ -55,27 +59,5 @@ public class LocacaoService {
 		System.out.println(locacao.getBicicleta().getEstoque() == 2);
 
 	}
-	
-	@Test
-	public void primeiroTeste() {
-		
-		//Cenário
-		LocacaoService service = new LocacaoService();
-		Cliente cliente = new Cliente("Cliente 01");
-		Bicicleta bicicleta = new Bicicleta("Bike 01", 2, 50.0);
-		Locacao locacao = new Locacao();
-		
-		
-		//Ação
-		locacao = service.alugarBicicleta(cliente, bicicleta);
-		
-		//Verificação / Validação
-		Assertions.assertTrue(locacao.getValorLocacao() == 50);
-		Assertions.assertTrue(boDatasIguais(locacao.getDataLocacao(), new Date()));
-		Assertions.assertTrue(boDatasIguais(locacao.getDataRetorno(), novaDataComDiferencaDeDias(3)));
-		Assertions.assertTrue(locacao.getCliente().getNome() == "Cliente 01");
-		Assertions.assertTrue(locacao.getBicicleta().getNome() == "Bike 01");
-		Assertions.assertTrue(locacao.getBicicleta().getEstoque() == 2);
-		
-	}
+
 }
