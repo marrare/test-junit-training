@@ -6,21 +6,32 @@ import static br.edu.ifpe.jaboatao.ts.utils.ManipulandoDatas.novaDataComDiferenc
 import java.util.Date;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import br.edu.ifpe.jaboatao.ts.entidades.Bicicleta;
 import br.edu.ifpe.jaboatao.ts.entidades.Cliente;
 import br.edu.ifpe.jaboatao.ts.entidades.Locacao;
 import br.edu.ifpe.jaboatao.ts.exception.LocacaoException;
 
+@TestMethodOrder(MethodOrderer.Random.class)
 public class LocacaoServiceTest {
+	LocacaoService service;
+	
+	@BeforeEach()
+	public void executaAntes() {
+		this.service = new LocacaoService(); 
+	}
 
 	@Test
+	@Disabled
 	public void primeiroTeste() throws LocacaoException {
 		
 		//Cenário
-		LocacaoService service = new LocacaoService(); 
 		Cliente cliente = new Cliente("Cliente 01");
 		Bicicleta bicicleta = new Bicicleta("Bike 01", 2, 50.0);
 		Locacao locacao = new Locacao();
@@ -44,7 +55,6 @@ public class LocacaoServiceTest {
 	public void estoqueVazio() {
 		
 		//Cenário
-		LocacaoService service = new LocacaoService(); 
 		Cliente cliente = new Cliente("Cliente 01");
 		Bicicleta bicicleta = new Bicicleta("Bike 01", 0, 50.0);
 		Locacao locacao = new Locacao();
@@ -63,7 +73,6 @@ public class LocacaoServiceTest {
 	public void estoqueVazio2() {
 		
 		//Cenário
-		LocacaoService service = new LocacaoService(); 
 		Cliente cliente = new Cliente("Cliente 01");
 		Bicicleta bicicleta = new Bicicleta("Bike 01", 0, 50.0);
 		
@@ -78,7 +87,6 @@ public class LocacaoServiceTest {
 	public void clienteVazio() {
 		
 		//Cenário
-		LocacaoService service = new LocacaoService(); 
 		Bicicleta bicicleta = new Bicicleta("Bike 01", 2, 50.0);
 		Locacao locacao = new Locacao();
 		
@@ -96,7 +104,6 @@ public class LocacaoServiceTest {
 	public void clienteVazio2() {
 		
 		//Cenário
-		LocacaoService service = new LocacaoService(); 
 		Bicicleta bicicleta = new Bicicleta("Bike 01", 2, 50.0);
 		
 		//Ação
@@ -110,7 +117,6 @@ public class LocacaoServiceTest {
 	public void bicicletaVazia() {
 		
 		//Cenário
-		LocacaoService service = new LocacaoService(); 
 		Cliente cliente = new Cliente("Cliente 01");
 		Locacao locacao = new Locacao();
 		
@@ -128,7 +134,6 @@ public class LocacaoServiceTest {
 	public void bicicletaVazia2() {
 		
 		//Cenário
-		LocacaoService service = new LocacaoService(); 
 		Cliente cliente = new Cliente("Cliente 01");
 		
 		//Ação
