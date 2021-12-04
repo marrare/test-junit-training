@@ -3,7 +3,9 @@ package br.edu.ifpe.jaboatao.ts.servicos;
 import static br.edu.ifpe.jaboatao.ts.utils.ManipulandoDatas.boDatasIguais;
 import static br.edu.ifpe.jaboatao.ts.utils.ManipulandoDatas.novaDataComDiferencaDeDias;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,29 +28,6 @@ public class LocacaoServiceTest {
 	public void executaAntes() {
 		this.service = new LocacaoService(); 
 	}
-
-	@Test
-	@Disabled
-	public void primeiroTeste() throws LocacaoException {
-		
-		//Cenário
-		Cliente cliente = new Cliente("Cliente 01");
-		Bicicleta bicicleta = new Bicicleta("Bike 01", 2, 50.0);
-		Locacao locacao = new Locacao();
-		
-		
-		//Ação
-		locacao = service.alugarBicicleta(cliente, bicicleta);
-		
-		//Verificação / Validação
-		Assertions.assertTrue(locacao.getValorLocacao() == 50);
-		Assertions.assertTrue(boDatasIguais(locacao.getDataLocacao(), new Date()));
-		Assertions.assertTrue(boDatasIguais(locacao.getDataRetorno(), novaDataComDiferencaDeDias(3)));
-		Assertions.assertTrue(locacao.getCliente().getNome() == "Cliente 01");
-		Assertions.assertTrue(locacao.getBicicleta().getNome() == "Bike 01");
-		Assertions.assertTrue(locacao.getBicicleta().getEstoque() == 2);
-		
-	}
 	
 	@Test
 	@DisplayName("Teste Estoque zerado - Modo Tradicional")
@@ -56,12 +35,11 @@ public class LocacaoServiceTest {
 		
 		//Cenário
 		Cliente cliente = new Cliente("Cliente 01");
-		Bicicleta bicicleta = new Bicicleta("Bike 01", 0, 50.0);
-		Locacao locacao = new Locacao();
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bike 01", 0, 50.0));
 		
 		//Ação
 		try {
-			locacao = service.alugarBicicleta(cliente, bicicleta);
+			service.alugarBicicleta(cliente, bicicletas);
 			Assertions.fail("Não ocorreu a exception estoque vazio.");
 		} catch (LocacaoException e) {
 			Assertions.assertEquals("Bicicleta sem estoque.", e.getMessage());
@@ -74,11 +52,11 @@ public class LocacaoServiceTest {
 		
 		//Cenário
 		Cliente cliente = new Cliente("Cliente 01");
-		Bicicleta bicicleta = new Bicicleta("Bike 01", 0, 50.0);
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bike 01", 0, 50.0));
 		
 		//Ação
-		LocacaoException e = Assertions.assertThrows(LocacaoException.class, () ->  {
-			Locacao locacao = service.alugarBicicleta(cliente, bicicleta);
+		Assertions.assertThrows(LocacaoException.class, () ->  {
+			service.alugarBicicleta(cliente, bicicletas);
 		}, "Não ocorreu a exception estoque vazio");
 	}
 	
@@ -87,12 +65,11 @@ public class LocacaoServiceTest {
 	public void clienteVazio() {
 		
 		//Cenário
-		Bicicleta bicicleta = new Bicicleta("Bike 01", 2, 50.0);
-		Locacao locacao = new Locacao();
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bike 01", 0, 50.0));
 		
 		//Ação
 		try {
-			locacao = service.alugarBicicleta(null, bicicleta);
+			service.alugarBicicleta(null, bicicletas);
 			Assertions.fail("Não ocorreu a exception cliente vazio");
 		} catch (LocacaoException e) {
 			Assertions.assertEquals("cliente vazio.", e.getMessage());
@@ -104,11 +81,11 @@ public class LocacaoServiceTest {
 	public void clienteVazio2() {
 		
 		//Cenário
-		Bicicleta bicicleta = new Bicicleta("Bike 01", 2, 50.0);
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bike 01", 0, 50.0));
 		
 		//Ação
-		LocacaoException e = Assertions.assertThrows(LocacaoException.class, () ->  {
-			Locacao locacao = service.alugarBicicleta(null , bicicleta);
+		Assertions.assertThrows(LocacaoException.class, () ->  {
+			service.alugarBicicleta(null , bicicletas);
 		}, "Não ocorreu a exception cliente vazio");
 	}
 	
@@ -122,7 +99,7 @@ public class LocacaoServiceTest {
 		
 		//Ação
 		try {
-			locacao = service.alugarBicicleta(cliente, null);
+			service.alugarBicicleta(cliente, null);
 			Assertions.fail("Não ocorreu a exception bicicleta vazia");
 		} catch (LocacaoException e) {
 			Assertions.assertEquals("bicicleta vazia.", e.getMessage());
@@ -137,8 +114,25 @@ public class LocacaoServiceTest {
 		Cliente cliente = new Cliente("Cliente 01");
 		
 		//Ação
-		LocacaoException e = Assertions.assertThrows(LocacaoException.class, () ->  {
-			Locacao locacao = service.alugarBicicleta(cliente , null);
+		Assertions.assertThrows(LocacaoException.class, () ->  {
+			service.alugarBicicleta(cliente , null);
 		}, "Não ocorreu a exception bicicleta vazia");
+	}
+	
+	@Test
+	@DisplayName("Valor da locacao")
+	public void checarValor() {
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bike 01", 1, 40.0), new Bicicleta("Bike 02", 2, 60.0));
+		Cliente cliente = new Cliente("Cliente 01");
+		Locacao locacao = new Locacao();
+		
+		try {
+			locacao = service.alugarBicicleta(cliente, bicicletas);
+		} catch (LocacaoException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		Assertions.assertEquals(100, locacao.getValorLocacao());
 	}
 }

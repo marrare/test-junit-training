@@ -1,19 +1,20 @@
 package br.edu.ifpe.jaboatao.ts.entidades;
 
 import java.util.Date;
+import java.util.List;
 
 public class Locacao {
 
 	private Cliente cliente;
-	private Bicicleta bicicleta;
+	private List<Bicicleta> bicicletas;
 	private Date dataLocacao;
 	private Date dataRetorno;
 	private Double valorLocacao;
 	
 	public Locacao() {}
-	public Locacao(Cliente cliente, Bicicleta bicicleta, Date dataLocacao, Date dataRetorno, Double valorLocacao) {
+	public Locacao(Cliente cliente, List<Bicicleta> bicicletas, Date dataLocacao, Date dataRetorno, Double valorLocacao) {
 		this.cliente = cliente;
-		this.bicicleta = bicicleta;
+		this.bicicletas = bicicletas;
 		this.dataLocacao = dataLocacao;
 		this.dataRetorno = dataRetorno;
 		this.valorLocacao = valorLocacao;
@@ -24,11 +25,12 @@ public class Locacao {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public Bicicleta getBicicleta() {
-		return bicicleta;
+	
+	public List<Bicicleta> getBicicletas() {
+		return bicicletas;
 	}
-	public void setBicicleta(Bicicleta bicicleta) {
-		this.bicicleta = bicicleta;
+	public void setBicicletas(List<Bicicleta> bicicletas) {
+		this.bicicletas = bicicletas;
 	}
 	public Date getDataLocacao() {
 		return dataLocacao;
