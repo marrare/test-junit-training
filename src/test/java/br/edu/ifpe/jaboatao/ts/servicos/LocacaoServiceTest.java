@@ -133,11 +133,11 @@ public class LocacaoServiceTest {
 			e.printStackTrace();
 		}
 		
-		Assertions.assertEquals(100, locacao.getValorLocacao());
+		Assertions.assertEquals(90, locacao.getValorLocacao());
 	}
 	
 	@Test
-	@DisplayName("Desconto de 10% na sua 2º bike.")
+	@DisplayName("Desconto de 10% para 2 bikes.")
 	public void desconto01() throws LocacaoException {
 		//Cenário
 		Cliente cliente = new Cliente("Cliente 01");
@@ -147,12 +147,12 @@ public class LocacaoServiceTest {
 		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
 		
 		//Verificação
-		Assertions.assertEquals(76, locacao.getValorLocacao());
+		Assertions.assertEquals(72, locacao.getValorLocacao());
 		
 	}
 	
 	@Test//
-	@DisplayName("Desconto de 15% na sua 3º bike.")
+	@DisplayName("Desconto de 15% para 3 bikes.")
 	public void desconto02() throws LocacaoException {
 		//Cenário
 		Cliente cliente = new Cliente("Cliente 01");
@@ -162,12 +162,12 @@ public class LocacaoServiceTest {
 		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
 		
 		//Verificação
-		Assertions.assertEquals(110, locacao.getValorLocacao());
+		Assertions.assertEquals(102, locacao.getValorLocacao());
 		
 	}
 	
 	@Test//
-	@DisplayName("Desconto de 25% na sua 4º bike.")
+	@DisplayName("Desconto de 25% para 4 bikes.")
 	public void desconto03() throws LocacaoException {
 		//Cenário
 		Cliente cliente = new Cliente("Cliente 01");
@@ -177,12 +177,12 @@ public class LocacaoServiceTest {
 		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
 		
 		//Verificação
-		Assertions.assertEquals(140, locacao.getValorLocacao());
+		Assertions.assertEquals(120, locacao.getValorLocacao());
 		
 	}
 	
 	@Test//
-	@DisplayName("Desconto de 50% na sua 5º bike.")
+	@DisplayName("Desconto de 50% para 5 bikes.")
 	public void desconto04() throws LocacaoException {
 		//Cenário
 		Cliente cliente = new Cliente("Cliente 01");
@@ -192,7 +192,7 @@ public class LocacaoServiceTest {
 		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
 		
 		//Verificação
-		Assertions.assertEquals(160, locacao.getValorLocacao());
+		Assertions.assertEquals(100, locacao.getValorLocacao());
 		
 	}
 }

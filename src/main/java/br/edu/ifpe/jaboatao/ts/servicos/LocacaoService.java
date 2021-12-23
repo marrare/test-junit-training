@@ -23,12 +23,13 @@ public class LocacaoService {
 			if (bicicleta.getEstoque() == 0) throw new LocacaoException("Bicicleta sem estoque.");
 			
 			double valor = bicicleta.getValor();
-			switch(i) {
-				case 1: precoBicicletas += valor * 0.90; break; 
-				case 2: precoBicicletas += valor * 0.85; break;
-				case 3: precoBicicletas += valor * 0.75; break;
-				case 4: precoBicicletas += valor * 0.50; break;
-				default: precoBicicletas += valor; break;
+			switch(bicicletas.size()) {
+				case 1: precoBicicletas += valor; break;
+				case 2: precoBicicletas += valor * 0.90; break;
+				case 3: precoBicicletas += valor * 0.85; break;
+				case 4: precoBicicletas += valor * 0.75; break;
+				default: 
+					precoBicicletas += valor * 0.50; break;
 			}
 		}	
 		
