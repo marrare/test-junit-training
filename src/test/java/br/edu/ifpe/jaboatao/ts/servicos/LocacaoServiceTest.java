@@ -135,4 +135,64 @@ public class LocacaoServiceTest {
 		
 		Assertions.assertEquals(100, locacao.getValorLocacao());
 	}
+	
+	@Test
+	@DisplayName("Desconto de 10% na sua 2º bike.")
+	public void desconto01() throws LocacaoException {
+		//Cenário
+		Cliente cliente = new Cliente("Cliente 01");
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bicicleta 01", 2, 40.0), new Bicicleta("Bicicleta 02", 2, 40.0));
+		
+		//Ação
+		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
+		
+		//Verificação
+		Assertions.assertEquals(76, locacao.getValorLocacao());
+		
+	}
+	
+	@Test//
+	@DisplayName("Desconto de 15% na sua 3º bike.")
+	public void desconto02() throws LocacaoException {
+		//Cenário
+		Cliente cliente = new Cliente("Cliente 01");
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bicicleta 01", 2, 40.0), new Bicicleta("Bicicleta 02", 2, 40.0), new Bicicleta("Bicicleta 03", 2, 40.0));
+		
+		//Ação
+		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
+		
+		//Verificação
+		Assertions.assertEquals(110, locacao.getValorLocacao());
+		
+	}
+	
+	@Test//
+	@DisplayName("Desconto de 25% na sua 4º bike.")
+	public void desconto03() throws LocacaoException {
+		//Cenário
+		Cliente cliente = new Cliente("Cliente 01");
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bicicleta 01", 2, 40.0), new Bicicleta("Bicicleta 02", 2, 40.0), new Bicicleta("Bicicleta 03", 2, 40.0), new Bicicleta("Bicicleta 04", 2, 40.0));
+		
+		//Ação
+		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
+		
+		//Verificação
+		Assertions.assertEquals(140, locacao.getValorLocacao());
+		
+	}
+	
+	@Test//
+	@DisplayName("Desconto de 50% na sua 5º bike.")
+	public void desconto04() throws LocacaoException {
+		//Cenário
+		Cliente cliente = new Cliente("Cliente 01");
+		List<Bicicleta> bicicletas = Arrays.asList(new Bicicleta("Bicicleta 01", 2, 40.0), new Bicicleta("Bicicleta 02", 2, 40.0), new Bicicleta("Bicicleta 03", 2, 40.0), new Bicicleta("Bicicleta 04", 2, 40.0), new Bicicleta("Bicicleta 05", 2, 40.0));
+		
+		//Ação
+		Locacao locacao = service.alugarBicicleta(cliente, bicicletas);
+		
+		//Verificação
+		Assertions.assertEquals(160, locacao.getValorLocacao());
+		
+	}
 }
