@@ -11,16 +11,12 @@ import br.edu.ifpe.jaboatao.ts.entidades.Locacao;
 import br.edu.ifpe.jaboatao.ts.exception.LocacaoException;
 
 public class LocacaoService {
-	private int varPublica;
-	private int varPrivate;
-	protected int varProtegida;
-	int varDefault;
 	
 	public Locacao alugarBicicleta(Cliente cliente, List<Bicicleta> bicicletas) throws LocacaoException {
 		
 		Double precoBicicletas = 0.0;
 		
-		if (bicicletas == null) throw new LocacaoException("bicicleta vazia.");
+		if (bicicletas == null || bicicletas.isEmpty()) throw new LocacaoException("bicicleta vazia.");
 		if (cliente == null) throw new LocacaoException("cliente vazio.");
 		for( Bicicleta bicicleta: bicicletas ) {
 			if (bicicleta.getEstoque() == 0) throw new LocacaoException("Bicicleta sem estoque.");
